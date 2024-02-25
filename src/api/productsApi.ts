@@ -20,3 +20,11 @@ export async function getProducts(): Promise<ProductsResponse> {
 
     return data;
 }
+
+export async function getProduct(id: string): Promise<productResponse> {
+    const { data } = await Api.get<productResponse>({
+        path: `/products/${id}`
+    });
+
+    return data;
+}
