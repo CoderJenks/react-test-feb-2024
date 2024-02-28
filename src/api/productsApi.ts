@@ -1,10 +1,10 @@
 import Api from "./Api";
 
 export interface ProductsResponse {
-    products: productResponse[];
+    products: ProductResponse[];
 }
 
-export interface productResponse {
+export interface ProductResponse {
     id: number,
     colour: string,
     name: string,
@@ -13,16 +13,16 @@ export interface productResponse {
 }
 
 
-export async function getAllProducts(): Promise<ProductsResponse> {
-    const { data } = await Api.get<ProductsResponse>({
+export async function getAllProducts(): Promise<ProductResponse[]> {
+    const { data } = await Api.get<ProductResponse[]>({
         path: `/products`
     });
 
     return data;
 }
 
-export async function getProduct(id: string): Promise<productResponse> {
-    const { data } = await Api.get<productResponse>({
+export async function getProduct(id: string): Promise<ProductResponse> {
+    const { data } = await Api.get<ProductResponse>({
         path: `/products/${id}`
     });
 
