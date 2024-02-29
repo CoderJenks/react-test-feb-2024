@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react"
+import { render, screen, waitFor } from "@testing-library/react"
 
 import CheckoutPage from "../../components/checkoutPage/CheckoutPage";
 import { ShoppingBasketContext, ShoppingBasketContextValue} from "../../context/ShoppingBasketContext";
@@ -51,8 +51,8 @@ describe("Checkout Page", () => {
         expect(screen.getByText("Colour: blue")).toBeInTheDocument();
         expect(screen.getByAltText("Test dress 1")).toBeInTheDocument();
     });
-    
-    test("Add to Basket button calls addtoBasket function when clicked", async () => {
+
+    test("Add to Basket button calls addToBasket function when clicked", async () => {
         render(
             <ShoppingBasketContext.Provider value={dummyBasketContext}>
                 <CheckoutPage />
@@ -65,6 +65,29 @@ describe("Checkout Page", () => {
 
         expect(dummyBasketContext.addToBasket).toHaveBeenCalledTimes(1);
         expect(dummyBasketContext.addToBasket).toHaveBeenCalledWith( {
+            id: 1,
+            colour: "blue",
+            name: "Test dress 1",
+            price: 5.99,
+            img: "https://test.com/image1"
+        });
+    })
+
+    test("Remove from Basket button calls removeFromBasket function when clicked", async () => {
+        render(
+            <ShoppingBasketContext.Provider value={dummyBasketContext}>
+                <CheckoutPage />
+            </ShoppingBasketContext.Provider >
+        );
+        
+        await screen.findByText("-");
+
+        expect(screen.getByText("Test dress 1")).toBeInTheDocument();
+
+        userEvent.click(screen.getByText("-"));
+
+        expect(dummyBasketContext.removeFromBasket).toHaveBeenCalledTimes(1);
+        expect(dummyBasketContext.removeFromBasket).toHaveBeenCalledWith( {
             id: 1,
             colour: "blue",
             name: "Test dress 1",

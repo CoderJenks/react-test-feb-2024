@@ -18,6 +18,18 @@ const CheckoutPage = () => {
         
     }
 
+    async function onRemovefromBasketClicked (item:BasketItemType) {
+        const itemToBeRemoved:ProductResponse = {
+            id: item.id,
+            colour: item.colour,
+            name: item.name,
+            price: item.price,
+            img: item.img
+        }
+            removeFromBasket(itemToBeRemoved);
+        
+    }
+
     function BasketProductCard(item:BasketItemType) {
         return (
             <div className="BasketProductCard__Container" _data-testid={`ProductCard-${item.id}`}>
@@ -29,7 +41,7 @@ const CheckoutPage = () => {
                     <div>
                         Quantity in basket:
                         <div className="BasketProductCard__Quantity">
-                            <button className="BasketProductCard__RemoveItemButton">-</button>
+                            <button className="BasketProductCard__RemoveItemButton" onClick={() => {onRemovefromBasketClicked(item)}}>-</button>
                             {item.quantity}
                             <button className="BasketProductCard__AddItemButton" onClick={() => onAddToBasketClicked(item)}>+</button>
                         </div>
