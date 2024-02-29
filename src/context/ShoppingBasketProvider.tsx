@@ -1,11 +1,9 @@
-import { PropsWithChildren, useRef, useState } from "react";
+import { PropsWithChildren, useState } from "react";
 import { BasketItemType, ShoppingBasketContext } from "./ShoppingBasketContext";
 import { ProductResponse } from "../api/productsApi";
 
 export function ShoppingBasketProvider({ children }: PropsWithChildren<unknown>) {
     const [basketItems, setBasketItems] = useState<BasketItemType[]>([]);
-    const basketItemsRef = useRef(basketItems);
-    basketItemsRef.current = basketItems;
 
     /**
      * Adds an item to the basketItems state within the ShoppingBasketContext

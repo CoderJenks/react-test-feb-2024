@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainPage from './components/mainPage/MainPage';
 import CheckoutPage from './components/checkoutPage/CheckoutPage';
 import { ShoppingBasketProvider } from './context/ShoppingBasketProvider';
+import SingleProductPage from './components/singleProductPage/SingleProductPage';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Routes>
             <Route index element={<MainPage />}/>
             <Route path="checkout" element={<CheckoutPage />}/>
+            <Route path="products/:productId" element={<SingleProductPage />}/>
           </Routes>
         </ShoppingBasketProvider>
       </BrowserRouter>
