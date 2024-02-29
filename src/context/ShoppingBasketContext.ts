@@ -6,7 +6,7 @@ export interface BasketItemType extends ProductResponse {
 }
 
 export interface ShoppingBasketContextValue {
-    basketItems?: BasketItemType[];
+    basketItems: BasketItemType[];
     addToBasket: (basketItem:ProductResponse) => void;
     removeFromBasket: (basketItem:ProductResponse) => void;
 }

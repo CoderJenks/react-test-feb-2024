@@ -6,9 +6,7 @@ jest.mock("../../api/productsApi")
 
 describe("Main Page", () => {
     test("Renders page header", () => {
-        render(
-            <MainPage />
-        );
+        render(<MainPage />);
         expect(screen.getByText("Main Page")).toBeInTheDocument();
     });
 
