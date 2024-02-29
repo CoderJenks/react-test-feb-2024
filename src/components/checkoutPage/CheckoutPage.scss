@@ -1,0 +1,30 @@
+.CheckoutPage {
+    &__Content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+    }
+}
+
+.BasketProductCard {
+    &__Container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        width: 50%;
+        padding: 16px 0px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__ProductDetails {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        margin: 20px;
+    }
+
+   &__Image {
+    width: 100%;
+   }
+}
