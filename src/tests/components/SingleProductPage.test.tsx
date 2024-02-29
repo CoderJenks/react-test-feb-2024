@@ -118,6 +118,13 @@ describe("Single Product Page", () => {
         userEvent.click(screen.getByText("Add to basket"));
 
         expect(dummyLoadingContext.addToBasket).toHaveBeenCalledTimes(1);
+        expect(dummyLoadingContext.addToBasket).toHaveBeenCalledWith( {
+            id: 9,
+            colour: "green",
+            name: "Test dress 2",
+            price: 17,
+            img: "https://test.com/image2"
+        });
 
 
 
