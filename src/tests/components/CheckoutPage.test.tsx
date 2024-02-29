@@ -1,7 +1,21 @@
 import { render, screen } from "@testing-library/react"
 
 import CheckoutPage from "../../components/checkoutPage/CheckoutPage";
-import { ShoppingBasketContext} from "../../context/ShoppingBasketContext";
+import { ShoppingBasketContext, ShoppingBasketContextValue} from "../../context/ShoppingBasketContext";
+import userEvent from "@testing-library/user-event";
+
+const dummyBasketContext: ShoppingBasketContextValue = {
+    basketItems: [{
+        id: 1,
+        colour: "blue",
+        name: "Test dress 1",
+        price: 5.99,
+        img: "https://test.com/image1",
+        quantity: 1
+    }],
+    addToBasket: jest.fn(),
+    removeFromBasket: jest.fn()
+    }
 
 describe("Checkout Page", () => {
     test("Renders page header", () => {
@@ -37,4 +51,25 @@ describe("Checkout Page", () => {
         expect(screen.getByText("Colour: blue")).toBeInTheDocument();
         expect(screen.getByAltText("Test dress 1")).toBeInTheDocument();
     });
+    
+    test("Add to Basket button calls addtoBasket function when clicked", async () => {
+        render(
+            <ShoppingBasketContext.Provider value={dummyBasketContext}>
+                <CheckoutPage />
+            </ShoppingBasketContext.Provider >
+        );
+
+        await screen.findByText("+");
+
+        userEvent.click(screen.getByText("+"));
+
+        expect(dummyBasketContext.addToBasket).toHaveBeenCalledTimes(1);
+        expect(dummyBasketContext.addToBasket).toHaveBeenCalledWith( {
+            id: 1,
+            colour: "blue",
+            name: "Test dress 1",
+            price: 5.99,
+            img: "https://test.com/image1"
+        });
+    })
 })

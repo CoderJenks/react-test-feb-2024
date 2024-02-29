@@ -1,19 +1,39 @@
 import { useContext } from "react"
 import { BasketItemType, ShoppingBasketContext } from "../../context/ShoppingBasketContext"
 import "./CheckoutPage.scss";
+import { ProductResponse } from "../../api/productsApi";
 
 const CheckoutPage = () => {
-    const { basketItems } = useContext(ShoppingBasketContext);
+    const { basketItems, addToBasket, removeFromBasket } = useContext(ShoppingBasketContext);
 
-    function BasketProductCard({ id, colour, name, price, img, quantity }:BasketItemType) {
+    async function onAddToBasketClicked (item:BasketItemType) {
+        const itemToBeAdded:ProductResponse = {
+            id: item.id,
+            colour: item.colour,
+            name: item.name,
+            price: item.price,
+            img: item.img
+        }
+            addToBasket(itemToBeAdded);
+        
+    }
+
+    function BasketProductCard(item:BasketItemType) {
         return (
-            <div className="BasketProductCard__Container" _data-testid={`ProductCard-${id}`}>
-                <img className="BasketProductCard__Image" src={img} alt={name} />
+            <div className="BasketProductCard__Container" _data-testid={`ProductCard-${item.id}`}>
+                <img className="BasketProductCard__Image" src={item.img} alt={item.name} />
                 <div className="BasketProductCard__ProductDetails" >
-                    <h3 className="BasketProductCard__Name">{name}</h3>
-                    <h4 className="BasketProductCard__Colour">Colour: {colour}</h4>
-                    <div className="BasketProductCard__Price">Price: {new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP" }).format(price)}</div>
-                    <div className="BasketProductCard__Quantity">Quantity in basket: {quantity}</div>
+                    <h3 className="BasketProductCard__Name">{item.name}</h3>
+                    <h4 className="BasketProductCard__Colour">Colour: {item.colour}</h4>
+                    <div className="BasketProductCard__Price">Price: {new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP" }).format(item.price)}</div>
+                    <div>
+                        Quantity in basket:
+                        <div className="BasketProductCard__Quantity">
+                            <button className="BasketProductCard__RemoveItemButton">-</button>
+                            {item.quantity}
+                            <button className="BasketProductCard__AddItemButton" onClick={() => onAddToBasketClicked(item)}>+</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         )

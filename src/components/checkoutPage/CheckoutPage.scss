@@ -27,4 +27,15 @@
    &__Image {
     width: 100%;
    }
+
+   &__Price {
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+   }
+
+   &__Quantity {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+   }
 }
