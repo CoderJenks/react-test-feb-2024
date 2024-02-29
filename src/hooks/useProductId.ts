@@ -1,13 +1,13 @@
 import { useParams } from "react-router-dom";
 
 function useProductId(): string {
-    const { productId } = useParams();
+  const { productId } = useParams();
 
-    if (!productId) {
-        throw new Error("Missing productId from params");
-    }
+  if (!productId) {
+    throw new Error("Missing productId from params");
+  }
 
-    return productId;
+  return productId;
 }
 
 export default useProductId;
