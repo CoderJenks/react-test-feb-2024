@@ -5,6 +5,7 @@ import MainPage from './components/mainPage/MainPage';
 import CheckoutPage from './components/checkoutPage/CheckoutPage';
 import { ShoppingBasketProvider } from './context/ShoppingBasketProvider';
 import SingleProductPage from './components/singleProductPage/SingleProductPage';
+import NavBar from './components/navBar/NavBar';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <BrowserRouter>
         <ShoppingBasketProvider>
           <h1>React Test</h1>
+          <NavBar />
           <Routes>
             <Route index element={<MainPage />}/>
             <Route path="checkout" element={<CheckoutPage />}/>
